@@ -12,7 +12,7 @@ if(isset($sampleHouses)) {
 	<div class="inews-l">
 		<div class="inews-l-title">
 			<img class="imgIcon" src="<?=base_url('/img/nhadep1.png')?>" alt="Nhà đẹp">
-			<h3 class="title"><a href="/nha-mau-dep.html" title="Tin Bất Động Sản">Thiết kế đẹp</a></h3>
+			<h3 class="title"><a href="/khong-gian-song.html" title="Tin Bất Động Sản">Thiết kế đẹp</a></h3>
 			<div class="clear-both"></div>
 		</div>
 		<div class="inews-l-content">
