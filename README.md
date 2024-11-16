@@ -2,7 +2,7 @@
 Real Estate - Display Site
 ###################
 
-Display data from crawler module: `Crawler source <https://github.com/jnguyen095/HomeLand>`_
+Display data from crawler module: Crawler source <https://github.com/jnguyen095/HomeLand>
 
 *******************
 Server Requirements
@@ -19,7 +19,7 @@ issues, as well as missing features.
 Live site
 *********
 
--  `Link  <https://nhadatancu.com>`_
+-  Link  <https://nhadatancu.com>
 
 ***************
 Technologies
