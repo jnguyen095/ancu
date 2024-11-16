@@ -11,7 +11,7 @@
 if(isset($topbranchhasproduct) && count($topbranchhasproduct) > 0){
 	?>
 	<div class="block-panel">
-		<div class="block-header text-left">CÁC DỰ ÁN NỔI BẬT</div>
+		<div class="block-header text-left"><h2>CÁC DỰ ÁN NỔI BẬT</h2></div>
 		<div class="block-body">
 			<ul class="city-link">
 				<?php

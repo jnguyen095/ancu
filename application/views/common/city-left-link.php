@@ -12,7 +12,7 @@ if(isset($topcityhasproduct) && count($topcityhasproduct) > 0){
 	$counter = 1;
 	?>
 	<div class="block-panel">
-		<div class="block-header text-left">NHÀ ĐẤT CÁC THÀNH PHỐ</div>
+		<div class="block-header text-left"><h2>NHÀ ĐẤT CÁC THÀNH PHỐ</h2></div>
 		<div class="block-body">
 			<ul class="city-link">
 				<?php

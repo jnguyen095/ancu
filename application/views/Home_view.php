@@ -84,7 +84,7 @@
 			<div id='carousel-custom' class='carousel slide hot-product fix-height-standard' data-interval="7000" data-ride='carousel'>
 				<img class="post-star" src="<?=base_url('/img/3d-yellow-star.png')?>"/>
 				<div class='carousel-outer'>
-					<h2 class="cooperateRealEstate">NHÀ ĐẸP</h2>
+					<h1 class="cooperateRealEstate">NHÀ ĐẸP</h1>
 					<!-- Wrapper for slides -->
 					<div class='carousel-inner'>
 						<?php
@@ -148,7 +148,7 @@
 			<div class="row no-padding">
 				<div class="col-md-6 col-sm-12">
 					<div class="home-group">
-						<div class="block-header text-left"><a href="<?=base_url('/nha-dat-ban-c257.html')?>"><h2 class="h2Class">NHÀ ĐẤT BÁN</h2></a></div>
+						<div class="block-header text-left"><a href="<?=base_url('/nha-dat-ban-c257.html')?>"><h1 class="h1Class">NHÀ ĐẤT BÁN</h1></a></div>
 						<?php
 						foreach ($nhadatban as $product){
 							?>
@@ -182,7 +182,7 @@
 
 				<div class="col-md-6 col-sm-12">
 					<div class="home-group">
-						<div class="block-header text-left"><a href="<?=base_url('/nha-dat-cho-thue-c267.html')?>"><h2 class="h2Class">NHÀ ĐẤT CHO THUÊ</h2></a></div>
+						<div class="block-header text-left"><a href="<?=base_url('/nha-dat-cho-thue-c267.html')?>"><h1 class="h1Class">NHÀ ĐẤT CHO THUÊ</h1></a></div>
 						<?php
 						foreach ($nhadatchothue as $product){
 							?>
@@ -234,7 +234,7 @@
 
 			<div class="row home-group">
 				<div class="col-md-6 col-xs-12">
-					<div class="block-header text-left"><a href="<?=base_url('/nha-dat-duoi-mot-ty.html')?>"><h2 class="h2Class">NHÀ ĐẤT DƯỚI 1 TỶ</h2></a></div>
+					<div class="block-header text-left"><a href="<?=base_url('/nha-dat-duoi-mot-ty.html')?>"><h1 class="h1Class">NHÀ ĐẤT DƯỚI 1 TỶ</h1></a></div>
 					<?php
 					foreach ($underOneBillion as $product){
 						?>
@@ -254,7 +254,7 @@
 					<div class="clear-both"></div>
 				</div>
 				<div class="col-md-6 col-xs-12">
-					<div class="block-header text-left"><a href="<?=base_url('/bat-dong-san-moi-cap-nhat.html')?>"><h2 class="h2Class">MỚI CẬP NHẬT</h2></a></div>
+					<div class="block-header text-left"><a href="<?=base_url('/bat-dong-san-moi-cap-nhat.html')?>"><h1 class="h1Class">MỚI CẬP NHẬT</h1></a></div>
 					<?php
 					foreach ($justUpdates as $product){
 						?>
