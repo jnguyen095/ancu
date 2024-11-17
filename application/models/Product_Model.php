@@ -141,7 +141,7 @@ class Product_Model extends CI_Model
 	public function pushPostUp($productId){
 		$this->db->set('ModifiedDate', 'NOW()', false);
 		$this->db->set('RefreshCount', 'RefreshCount + 1', false);
-		$this->db->where('ProductID', $productId);
+		$this->db->where(array("ProductID" => $productId, "RefreshCount < " => MAX_REFRESH_STANDARD_POST));
 		$this->db->update('product');
 	}
 
