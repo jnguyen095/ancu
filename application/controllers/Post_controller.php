@@ -564,7 +564,8 @@ class Post_controller extends CI_Controller
 				if($ok){
 					// Save successful
 					//$this->session->unset_userdata('captcha');
-					redirect("dang-bai-thanh-cong-p".$ok);
+					// redirect("dang-bai-thanh-cong-p".$ok);
+					redirect("quan-ly-tin-rao?code=" . $ok);
 				}else{
 					// Save failure
 					//validation fails

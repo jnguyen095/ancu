@@ -316,7 +316,7 @@
 					</div>
 				</div>
 
-
+				<?php /*
 				<div class="block-panel">
 					<div class="block-header">BẢN ĐỒ - VỊ TRÍ <span class="required">(Thay đổi vị trí bằng cách click lên bản đồ)</span></div>
 					<div class="block-body">
@@ -327,6 +327,7 @@
 						<div id="map" style="display:<?=(((isset($displayMap) && $displayMap == 0) || $lng == 0) ? 'none' : 'block')?>"></div>
 					</div>
 				</div>
+ 				*/?>
 
 				<div class="row text-center bottom-buttons">
 					<input type="hidden" name="crudaction" value="update_post">
