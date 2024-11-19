@@ -77,6 +77,14 @@ class ProCode_Model extends CI_Model
 		return $num;
 	}
 
+	function countIfValidCode($code, $type){
+		$date = new DateTime("now");
+		$curr_date = $date->format('Y-m-d ');
+		$this->db->where(array("Code" => $code, "Type" => $type, "Status" => 1, "ExpiredDate >=" => $curr_date));
+		$num = $this->db->count_all_results("ProCode");
+		return $num;
+	}
+
 	function increaseCounterAndUpdateView($id, $data){
 		$this->db->set('Click', 'Click + 1', false);
 		$this->db->where('BannerID', $id);

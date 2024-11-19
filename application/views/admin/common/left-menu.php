@@ -46,6 +46,7 @@
 			<li><a href="<?=base_url('/admin/cooperate/list.html')?>"><i class="fa fa-send-o"></i> <span>Gửi BĐS</span></a></li>
 			<li><a href="<?=base_url('/admin/feedback/list.html')?>"><i class="fa fa-thumbs-o-up"></i> <span>Phản hồi</span></a></li>
 			<li><a href="<?=base_url('/admin/brand/list.html')?>"><i class="fa fa-link"></i> <span>Dự án</span></a></li>
+			<li><a href="<?=base_url('/admin/pro-code/list.html')?>"><i class="fa fa-barcode"></i> <span>Mã khuyến mãi</span></a></li>
 			<li><a href="<?=base_url('/admin/static-page/list.html')?>"><i class="fa fa-newspaper-o"></i> <span>Trang tĩnh</span></a></li>
 			<li><a href="<?=base_url('/admin/banner/list.html')?>"><i class="fa fa-bars"></i> <span>Banner</span></a></li>
 			<li><a href="<?=base_url('/admin/sitemap/list.html')?>"><i class="fa fa-sitemap"></i> <span>Sitemap</span></a></li>

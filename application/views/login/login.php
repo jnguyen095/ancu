@@ -16,10 +16,17 @@
 
 	<div class="row no-margin">
 		<div class="col-lg-6 col-lg-offset-3 col-sm-6 no-background well login-panel">
+			<?php if(!empty($message_response)){
+				echo '<div class="alert alert-success">';
+				echo '<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>';
+				echo $message_response;
+				echo '</div>';
+			}?>
 			<?php
 				$attributes = array("class" => "form-horizontal", "id" => "loginform", "name" => "loginform");
 				echo form_open("dang-nhap", $attributes);
 			?>
+
 			<fieldset>
 				<legend class="text-center">ĐĂNG NHẬP</legend>
 				<div class="form-group">

@@ -3,7 +3,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Nhà Đất An Cư | Đăng Ký</title>
+		<title>Nhà Đất An Cư | Đăng Ký Chuyên Viên</title>
 		<?php $this->load->view('common_header')?>
 		<?php $this->load->view('/common/googleadsense')?>
 	</head>
@@ -29,11 +29,23 @@
 			}?>
 
 			<?php
-				$attributes = array("class" => "form-horizontal", "id" => "register", "name" => "register");
-				echo form_open("dang-ky", $attributes);
+				$attributes = array("enctype" => "multipart/form-data", "class" => "form-horizontal", "id" => "registerBroker", "name" => "register");
+				echo form_open("dang-ky-chuyen-vien", $attributes);
 			?>
 			<fieldset>
-				<legend class="text-center">ĐĂNG KÝ TÀI KHOẢN ĐĂNG TIN</legend>
+				<legend class="text-center">ĐĂNG KÝ TÀI KHOẢN CHUYÊN VIÊN</legend>
+				<div class="form-group">
+					<div class="row colbox no-margin">
+						<div class="col-lg-4 col-sm-4">
+							<label for="txt_fullname" class="control-label">Mã giới thiệu <span class="required">*</span> </label>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<input class="form-control" id="txt_procode" name="txt_procode" placeholder="Mã giới thiệu" type="text" value="<?php echo set_value('txt_procode'); ?>" />
+							<span class="text-danger"><?php echo form_error('txt_procode'); ?></span>
+						</div>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<div class="row colbox no-margin">
 						<div class="col-lg-4 col-sm-4">
@@ -73,6 +85,39 @@
 				<div class="form-group">
 					<div class="row colbox no-margin">
 						<div class="col-lg-4 col-sm-4">
+							<label for="txt_email" class="control-label">Hình đại diện</label>
+						</div>
+						<div class="col-lg-8 col-sm-8">
+							<?php
+							if (isset($txt_avatar) && $txt_avatar != null) {
+								?>
+								<div>
+									<img src="<?= base_url($txt_avatar) ?>" class="img-responsive img-thumbnail" style="max-width:100px; margin-bottom: 5px;">
+								</div>
+								<input type="hidden" name="txt_currentAvatar" value="<?=$txt_avatar?>" />
+								<?php
+							}
+							?>
+							<input type="file" id="txt_avatar" name="txt_avatar">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="row colbox no-margin">
+						<div class="col-lg-4 col-sm-4">
+							<label for="txt_email" class="control-label">Giới thiệu</label>
+						</div>
+						<div class="col-lg-8 col-sm-8">
+							<input class="form-control" id="txt_bio" name="txt_bio" placeholder="Giới thiệu" type="text" value="<?php echo set_value('txt_bio', $txt_bio); ?>" />
+							<span class="text-danger"><?php echo form_error('txt_bio'); ?></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="row colbox no-margin">
+						<div class="col-lg-4 col-sm-4">
 							<label for="txt_email" class="control-label">Email</label>
 						</div>
 						<div class="col-lg-8 col-sm-8">
@@ -99,8 +144,6 @@
 						<input id="btn_login" name="btn_login" type="submit" class="btn btn-info" value="Đăng Ký" /> | <a href="<?=base_url('dang-nhap.html')?>">Đăng Nhập</a>
 					</div>
 				</div>
-
-				<div class="text-center">Bạn là chuyên viên muốn trở thành một broker? và có mã giới thiệu hãy đăng ký tại đây: <a class="btn btn-warning" href="<?=base_url('dang-ky-chuyen-vien.html')?>">Đăng ký tại đây</a></div>
 
 			</fieldset>
 			<?php echo form_close(); ?>

@@ -58,6 +58,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['dang-nhap'] = "Login_controller/index";
 // Dang ky thanh vien
 $route['dang-ky'] = "Register_controller";
+// Dang ky chuyen vien
+$route['dang-ky-chuyen-vien'] = "Register_controller/broker";
 // Dang xuat
 $route['dang-xuat'] = "Login_controller/logout";
 // Dang tin rao
