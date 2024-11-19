@@ -189,3 +189,7 @@ $route['admin/banner/analytic-(:num)'] = "admin/Banner_controller/analytic/$1";
 $route['admin/staff/list'] = "admin/UserManagement_controller/staff";
 $route['admin/staff/add'] = "admin/UserManagement_controller/addStaff";
 $route['admin/staff/add-(:num)'] = "admin/UserManagement_controller/addStaff/$1";
+$route['admin/pro-code/list'] = "admin/ProCode_controller";
+$route['admin/pro-code/add'] = "admin/ProCode_controller/add";
+$route['admin/pro-code/add-(:num)'] = "admin/ProCode_controller/add/$1";
+
