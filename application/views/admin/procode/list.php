@@ -65,6 +65,7 @@
 								<th>Dùng một lần</th>
 								<th>Status</th>
 								<th>Hết hạn</th>
+								<th>Đã tham gia</th>
 								<th>#</th>
 							</tr>
 						</thead>
@@ -86,6 +87,7 @@
 										?>
 									</td>
 									<td><?=date('d/m/Y', strtotime($code->ExpiredDate)) ?></td>
+									<td><?=number_format($code->Involved)?></td>
 									<td>
 										<a href="<?=base_url('/admin/pro-code/add-'.$code->ProCodeID.'.html')?>" data-toggle="tooltip" title="Chỉnh sửa"><i class="	glyphicon glyphicon-edit"></i></a>&nbsp;|&nbsp;
 										<a href="<?=base_url('/admin/pro-code/analytic-'.$code->ProCodeID.'.html')?>" data-toggle="tooltip" title="Xem thống kê"><i class="glyphicon glyphicon-list-alt"></i></a>&nbsp;|&nbsp;
