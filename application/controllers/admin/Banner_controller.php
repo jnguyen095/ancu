@@ -99,7 +99,7 @@ class Banner_controller extends CI_Controller
 			$data['txt_priority'] = $banner->Priority;
 			$data['ch_status'] = $banner->Status;
 			$data['BannerID'] = $banner->BannerID;
-			$data['from_date'] = date('d/m/Y', strtotime($banner->FromDate));;
+			$data['from_date'] = date('d/m/Y', strtotime($banner->FromDate));
 			$data['to_date'] = date('d/m/Y', strtotime($banner->ToDate));
 			$data['txt_image'] = $banner->Image;
 		}else{
