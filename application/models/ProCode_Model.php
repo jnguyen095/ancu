@@ -23,6 +23,7 @@ class ProCode_Model extends CI_Model
 				'Status' => $data['ch_status'],
 				'OneTime' => $data['ch_onetime'],
 				'About' => $data['txt_about'],
+				'Involved' => 0,
 				'CreatedDate' => date('Y-m-d H:i:s'),
 				'ExpiredDate' => $expDate->format('Y-m-d')
 			);
