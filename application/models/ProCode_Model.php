@@ -111,7 +111,7 @@ class ProCode_Model extends CI_Model
 		$query = $this->db->select('u.FullName, s.CreatedDate')
 			->from('ProCodeStatistic s')
 			->join('ProCode p', 'p.ProCodeID = s.ProCodeID')
-			->join('Us3r u', 'u.us3rID = s.UserID')
+			->join('us3r u', 'u.us3rID = s.UserID')
 			->where('p.ProCodeID', $proCodeId)
 			->limit($per_page, $page)
 			->get();
