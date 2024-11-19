@@ -143,7 +143,10 @@ class Register_controller extends CI_Controller
 						$newdata['bio'] = $this->input->post('txt_bio');
 						$newdata['avatar'] = $data['txt_avatar'];
 
-						$this->User_Model->addNewUser($newdata, USER_GROUP_BROKER);
+						$userId = $this->User_Model->addNewUser($newdata, USER_GROUP_BROKER);
+						// insert into promotion code statistic
+						$this->ProCode_Model->insertIntoStatistic($userId, $code);
+
 						$data['message_response'] = 'Bạn đã đăng ký thành công tài khoản chuyên viên, hãy đăng nhập';
 					}
 				}

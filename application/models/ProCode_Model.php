@@ -46,6 +46,27 @@ class ProCode_Model extends CI_Model
 		}
 	}
 
+	function insertIntoStatistic($userId, $proCode){
+		$proCodeId = $this->db->select('ProCodeID')
+			->from('ProCode')
+			->where('Code', $proCode)
+			->get()->row()->ProCodeID;
+
+		$data = array(
+			'ProCodeID' => $proCodeId,
+			'UserID' => $userId,
+			'CreatedDate' => date('Y-m-d H:i:s')
+		);
+		$this->db->insert('ProCodeStatistic', $data);
+		$this->updateInvolved($proCodeId);
+	}
+
+	function updateInvolved($proCodeId){
+		$this->db->set('Involved', 'Involved + 1', false);
+		$this->db->where('ProCodeID', $proCodeId);
+		$this->db->update('ProCode');
+	}
+
 	function findAndFilter($offset, $limit){
 		//$this->output->enable_profiler(TRUE);
 		$query = $this->db->select('bn.*')
@@ -86,34 +107,20 @@ class ProCode_Model extends CI_Model
 		return $num;
 	}
 
-	function increaseCounterAndUpdateView($id, $data){
-		$this->db->set('Click', 'Click + 1', false);
-		$this->db->where('BannerID', $id);
-		$this->db->update('banner');
+	function findModelDetail($proCodeId, $page, $per_page){
+		$query = $this->db->select('u.FullName, s.CreatedDate')
+			->from('ProCodeStatistic s')
+			->join('ProCode p', 'p.ProCodeID = s.ProCodeID')
+			->join('Us3r u', 'u.us3rID = s.UserID')
+			->where('p.ProCodeID', $proCodeId)
+			->limit($per_page, $page)
+			->get();
 
-		$newdata = array(
-			'BannerID' => $id,
-			'IpAddress' => $data['IpAddress'],
-			'UserAgent' => $data['UserAgent'],
-			'Platform' => $data['Platform'],
-			'HitTime' => date('Y-m-d H:i:s')
-		);
-		$this->db->insert('bannerdetail', $newdata);
-		$insert_id = $this->db->insert_id();
-		return $insert_id;
-	}
-
-	function findModelDetail($bannerId, $page, $per_page){
-		//$this->output->enable_profiler(TRUE);
 		$data = [];
-		$this->db->where("BannerID", $bannerId);
-		$this->db->order_by("HitTime", "DESC");
-		$this->db->limit($per_page, $page);
-		$query = $this->db->get("bannerdetail");
 		$data['details'] = $query->result();
 
-		$this->db->where(array("BannerID" => $bannerId));
-		$total = $this->db->count_all_results('bannerdetail');
+		$this->db->where(array("ProCodeID" => $proCodeId));
+		$total = $this->db->count_all_results('ProCodeStatistic');
 		$data['total'] = $total;
 
 		return $data;

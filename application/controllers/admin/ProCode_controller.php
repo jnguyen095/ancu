@@ -93,6 +93,20 @@ class ProCode_controller extends CI_Controller
 		$this->load->view("admin/procode/add", $data);
 	}
 
+	public function analytic($proCodeID){
+		$config = pagination($this);
+		$config['base_url'] = base_url('admin/pro-code/analytic-'.$proCodeID.'.html');
+
+		$results = $this->ProCode_Model->findModelDetail($proCodeID, $config['page'], $config['per_page']);
+		$data['proDetails'] = $results['details'];
+		$config['total_rows'] = $results['total'];
+
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+		$this->load->view("admin/procode/analytic", $data);
+
+	}
+
 	private function uploadImage(){
 		if(!empty($this->input->post("txt_image"))){
 			return $this->input->post("txt_image");
@@ -115,20 +129,6 @@ class ProCode_controller extends CI_Controller
 			$img = $this->upload->data();
 			return $img['file_name'];
 		}
-	}
-
-	public function analytic($bannerId){
-		$config = pagination($this);
-		$config['base_url'] = base_url('admin/banner/analytic-'.$bannerId.'.html');
-
-		$results = $this->Banner_Model->findModelDetail($bannerId, $config['page'], $config['per_page']);
-		$data['bannerDetails'] = $results['details'];
-		$config['total_rows'] = $results['total'];
-
-		$this->pagination->initialize($config);
-		$data['pagination'] = $this->pagination->create_links();
-		$this->load->view("admin/banner/analytic", $data);
-
 	}
 
 	private function deleteBanner($bannerId){

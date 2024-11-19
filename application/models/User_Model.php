@@ -62,6 +62,7 @@ class User_Model extends CI_Model
 				'Avatar' => $data['avatar']
 			);
 			$this->db->insert('us3r', $newdata);
+			$userId = $this->db->insert_id();
 		} else {
 			$newdata = array(
 				'FullName' => $data['fullname'],
@@ -80,6 +81,8 @@ class User_Model extends CI_Model
 			$this->db->where('Us3rID', $userId);
 			$this->db->update('us3r', $newdata);
 		}
+
+		return $userId;
 		
 	}
 
