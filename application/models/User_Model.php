@@ -153,4 +153,22 @@ class User_Model extends CI_Model
 		$this->db->update('us3r', $newdata);
 	}
 
+	function checkIfPhoneAndEmailExisting($phone, $email){
+		$user = $this->db->select('Us3rID')
+			->from('us3r')
+			->where(array('Email' => $email, 'Phone' => $phone))
+			->get()
+			->row();
+		return $user != null ? $user -> Us3rID : null;
+	}
+
+	function updatePasswordByEmail($email, $password){
+		$newdata = array(
+			'Password' => $password,
+			'UpdatedDate' => date('Y-m-d H:i:s')
+		);
+		$this->db->where('Email', $email);
+		$this->db->update('us3r', $newdata);
+	}
+
 }

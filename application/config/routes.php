@@ -56,6 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Dang nhap
 $route['dang-nhap'] = "Login_controller/index";
+// quên mật khẩu
+$route['quen-mat-khau'] = "Login_controller/forgotPassword";
 // Dang ky thanh vien
 $route['dang-ky'] = "Register_controller";
 // Dang ky chuyen vien
@@ -64,7 +66,7 @@ $route['dang-ky-chuyen-vien'] = "Register_controller/broker";
 $route['dang-xuat'] = "Login_controller/logout";
 // Dang tin rao
 $route['dang-tin'] = "Post_controller";
-$route['gui-mail'] = "Email_controller/send_email";
+$route['gui-mail'] = "MySendMail_controller/htmlMail";
 // Xem truoc dang tin rao
 $route['xem-truoc-p(:num)'] = "Post_controller/preview/$1";
 // Chinh sua tin rao
