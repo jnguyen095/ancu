@@ -40,8 +40,8 @@
 			<!-- Optionally, you can add icons to the links -->
 			<li class="active"><a href="<?=base_url('/admin/dashboard.html')?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			<li><a href="<?=base_url('/admin/product/list.html')?>"><i class="fa fa-cart-arrow-down"></i> <span>Bài đăng</span></a></li>
-			<li><a href="<?=base_url('/admin/staff/list.html')?>"><i class="fa fa-address-card-o"></i> <span>Nhân viên</span></a></li>
 			<li><a href="<?=base_url('/admin/user/list.html')?>"><i class="fa fa-users"></i> <span>Người dùng</span></a></li>
+			<li><a href="<?=base_url('/admin/staff/list.html')?>"><i class="fa fa-address-card-o"></i> <span>Nhân viên</span></a></li>
 			<li><a href="<?=base_url('/admin/purchase-history/list.html')?>"><i class="fa fa-money"></i> <span>Giao dịch</span></a></li>
 			<li><a href="<?=base_url('/admin/cooperate/list.html')?>"><i class="fa fa-send-o"></i> <span>Gửi BĐS</span></a></li>
 			<li><a href="<?=base_url('/admin/feedback/list.html')?>"><i class="fa fa-thumbs-o-up"></i> <span>Phản hồi</span></a></li>

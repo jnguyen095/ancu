@@ -22,7 +22,9 @@ class Login_controller extends CI_Controller
 		$this->load->model('Login_Model');
 		$this->load->model('City_Model');
 		$this->load->model('Category_Model');
+		$this->load->model('User_Model');
 		$this->load->helper("seo_url");
+		$this->load->helper('string');
 	}
 
 	public function logout(){
@@ -142,5 +144,88 @@ class Login_controller extends CI_Controller
 		$this->session->unset_userdata('loginid');
 		$this->session->unset_userdata('usergroup');
 		$this->session->unset_userdata('fullname');
+	}
+
+	function forgotPassword(){
+		$this->load->driver('cache');
+		$categories = $this->cache->file->get('category');
+		$footerMenus = $this->cache->file->get('footer');
+		if(!$categories){
+			$categories = $this->Category_Model->getCategories();
+			$this->cache->file->save('category', $categories, 1440);
+		}
+		if(!$footerMenus) {
+			$footerMenus = $this->City_Model->findByTopProductOfCategoryGroupByCity();
+			$this->cache->file->save('footer', $footerMenus, 1440);
+		}
+		$data = $categories;
+		$data['footerMenus'] = $footerMenus;
+		$cities = $this->cache->file->get('cities');
+		if(!$cities){
+			$cities = $this->City_Model->getAllActive();
+			$this->cache->file->save('cities', $cities, 1440);
+		}
+		$data['cities'] = $cities;
+		// end file cached
+
+		$crudaction = $this->input->post("crudaction");
+		$phone = $this->input->post("txt_phone");
+		$email = $this->input->post("txt_email");
+		if($crudaction == "submit"){
+			$this->form_validation->set_rules("txt_email", "Email", "trim|required");
+			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "trim|required");
+			if($this->form_validation->run()){
+				$userId = $this->User_Model->checkIfPhoneAndEmailExisting($phone, $email);
+				// print_r('>>>' + $userId);
+				if($userId != null){
+					$tempRandomStr = random_string('alnum', 10);
+					$tempPassword = md5($tempRandomStr);
+					$this->User_Model->updatePasswordByEmail($email, $tempPassword);
+					$this->sendEmail("Nhà Đất An Cư - Quên Mật Khẩu", "Mật khẩu mới: $tempRandomStr , Đăng nhập: https://nhadatancu.com/dang-nhap.html" , $email);
+					$this->session->set_flashdata('message_response', 'Mật khẩu mới đã gửi vào email, vui lòng kiểm tra');
+					redirect('dang-nhap');
+					//$data['message_response'] = 'Mật khẩu mới đã gửi vào email, vui lòng kiểm tra';
+				} else {
+					$data['error_message'] = "Không tìm thấy số điện thoại và email này, vui lòng kiểm tra lại";
+				}
+			}
+		}
+
+		$this->load->view("login/forgotPassword", $data);
+	}
+
+	public function sendEmail($title, $message, $toEmail){
+
+		$this->load->library('email');
+
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'mail.nhadatancu.com'; // Replace with your SMTP server
+		$config['smtp_user'] = 'info@nhadatancu.com'; // Your SMTP username
+		$config['smtp_pass'] = 'p25khGAmY41P'; // Your SMTP password
+		$config['smtp_port'] = 587; // Typically 587 for TLS, 465 for SSL
+		$config['smtp_crypto'] = 'tls'; // Can be 'ssl' or 'tls'
+		$config['mailtype'] = 'html'; // Send email as HTML
+		$config['charset'] = 'utf-8'; // Character set
+		$config['wordwrap'] = TRUE; // Wordwrap for email content
+		$config['newline'] = "\r\n"; // Set newline character for email
+
+		$this->email->initialize($config);
+
+		///
+		$this->email->from('info@nhadatancu.com', 'Nhà Đất An Cư');
+		$this->email->to($toEmail);
+
+		$this->email->subject($title);
+		$this->email->message($message);
+
+
+		if ($this->email->send()) {
+			return true;
+		} else {
+			//echo "Email sending failed.";
+			//echo $this->email->print_debugger();
+			return false;
+		}
+
 	}
 }

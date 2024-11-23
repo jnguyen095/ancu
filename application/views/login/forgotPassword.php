@@ -3,7 +3,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Nhà Đất An Cư - Đăng Nhập</title>
+		<title>Nhà Đất An Cư - Quên Mật Khẩu</title>
 		<?php $this->load->view('common_header')?>
 		<?php $this->load->view('/common/googleadsense')?>
 		<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
@@ -22,23 +22,23 @@
 				echo $message_response;
 				echo '</div>';
 			}?>
-			<?php if(!empty($this->session->flashdata('message_response'))){
-				echo '<div class="alert alert-success">';
-				echo '<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>';
-				echo $this->session->flashdata('message_response');
+			<?php if(!empty($error_message)){
+				echo '<div class="alert alert-danger">';
+				echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+				echo $error_message;
 				echo '</div>';
 			}?>
 			<?php
-				$attributes = array("class" => "form-horizontal", "id" => "loginform", "name" => "loginform");
-				echo form_open("dang-nhap", $attributes);
+				$attributes = array("class" => "form-horizontal", "id" => "forgotpwform", "name" => "loginform");
+				echo form_open("quen-mat-khau", $attributes);
 			?>
 
 			<fieldset>
-				<legend class="text-center">ĐĂNG NHẬP</legend>
+				<legend class="text-center">QUÊN MẬT KHẨU</legend>
 				<div class="form-group">
 					<div class="row colbox no-margin">
 						<div class="col-lg-4 col-sm-4">
-							<label for="txt_username" class="control-label">Số điện thoại</label>
+							<label for="txt_username" class="control-label">Số điện thoại <span class="required">*</span></label>
 						</div>
 						<div class="col-lg-8 col-sm-8">
 							<input class="form-control" id="txt_phone" name="txt_phone" placeholder="Số điện thoại" type="text" value="<?php echo set_value('txt_phone'); ?>" />
@@ -46,58 +46,22 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<div class="row colbox no-margin">
 						<div class="col-lg-4 col-sm-4">
-							<label for="txt_password" class="control-label">Mật khẩu</label>
+							<label for="txt_username" class="control-label">Email <span class="required">*</span></label>
 						</div>
 						<div class="col-lg-8 col-sm-8">
-							<input class="form-control" id="txt_password" name="txt_password" placeholder="Password" type="password" value="<?php echo set_value('txt_password'); ?>" />
-							<span class="text-danger"><?php echo form_error('txt_password'); ?></span>
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="row colbox no-margin">
-						<div class="col-lg-4 col-sm-4">
-						</div>
-						<div class="col-lg-8 col-sm-8">
-							<label><input type="checkbox" class="minimal" name="ch_rememberme"/> Nhớ đăng nhập</label>
+							<input class="form-control" id="txt_email" name="txt_email" placeholder="Email" type="text" value="<?php echo set_value('txt_email'); ?>" />
+							<span class="text-danger"><?php echo form_error('txt_email'); ?></span>
 						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-lg-8 col-sm-8 col-lg-offset-4 text-left">
-						<input type="hidden" name="crudaction" value="Login"/>
-						<input id="btn_login" name="btn_login" type="submit" class="btn btn-info" value="Đăng nhập" /> | <a href="<?=base_url('quen-mat-khau.html')?>">Quên mật khẩu</a>
-					</div>
-				</div>
-
-				<legend class="text-center">Hoặc</legend>
-
-				<div class="form-group">
-					<div class="social-login-buttons text-center">
-
-						<?php $this->load->view('/FacebookID'); ?>
-						<a id="loginBtnFacebook" class="loginBtn loginBtn--facebook" >
-							Đăng nhập bằng Facebook
-						</a>
-
-						<?php $this->load->view('/GoogleID'); ?>
-						<a id="loginBtnGoogle" class="loginBtn loginBtn--google">
-							Đăng nhập bằng Google
-						</a>
-
-					</div>
-				</div>
-
-				<legend class="text-center">Chưa có tài khoản?</legend>
-				<div class="form-group">
-					<div class="social-login-buttons">
-						Đăng ký tại đây: <a href="<?=base_url('dang-ky.html')?>" class="btn btn-primary"><i class="glyphicon glyphicon-registration-mark"></i> Đăng ký</a> để đăng tin miễn phí và theo dõi phản hồi từ khách hàng.
+						<input type="hidden" name="crudaction" value="submit"/>
+						<input id="btn_login" name="btn_login" type="submit" class="btn btn-info" value="Lấy Lại Mật Khẩu" />
 					</div>
 				</div>
 
