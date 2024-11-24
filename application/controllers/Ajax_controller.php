@@ -269,7 +269,7 @@ class Ajax_controller extends CI_Controller
 	private function sendMailInformCallMe($postId, $phone, $message){
 		$email = $this->Product_Model->getAuthorEmailOfProduct($postId);
 		if($email != null && valid_email($email)){
-			my_send_email($email,"Nhadatancu.com tin nhắn từ: " . $phone, $message . "<br/> Xem tại đây: https://nhadatancu.com/yeu-cau-goi-lai.html");
+			my_send_email($email,"Nhadatancu.com tin nhắn từ: " . $phone, "<p>". $message . "</p><p>Xem tại đây: https://nhadatancu.com/yeu-cau-goi-lai.html</p>");
 		}
 	}
 }

@@ -808,11 +808,16 @@ class Product_Model extends CI_Model
 		return $total->Total;
 	}
 
+	/**
+	 * Get contact email in case the product has owner
+	 * @param $productId
+	 * @return null
+	 */
 	public function getAuthorEmailOfProduct($productId){
-		$sql = 'select u.Email from product p inner join us3r u on p.CreatedByID = u.Us3rID where p.ProductID = '.$productId;
+		$sql = 'select pd.ContactEmail from product p inner join productdetail pd on p.ProductID = pd.ProductID where p.CreatedByID is not null and p.ProductID = '.$productId;
 		$query = $this->db->query($sql);
 		$query = $query->row();
-		return $query->Email;
+		return $query != null ? $query->ContactEmail : null;
 	}
 
 }
