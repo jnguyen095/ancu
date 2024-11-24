@@ -814,7 +814,7 @@ class Product_Model extends CI_Model
 	 * @return null
 	 */
 	public function getAuthorEmailOfProduct($productId){
-		$sql = 'select pd.ContactEmail from product p inner join productdetail pd on p.ProductID = pd.ProductID where p.CreatedByID is not null and p.ProductID = '.$productId;
+		$sql = 'select pd.ContactEmail from product p inner join productdetail pd on p.ProductID = pd.ProductID where p.ProductID = '.$productId;
 		$query = $this->db->query($sql);
 		$query = $query->row();
 		return $query != null ? $query->ContactEmail : null;

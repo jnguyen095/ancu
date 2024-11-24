@@ -162,6 +162,7 @@ function contactFormHandler(){
 function callMeBackHandler(){
 	$("#btnCallMe").click(function(){
 		var postid = $(this).data('postid');
+		$(".overlay").show();
 		$.ajax({
 			type:'POST',
 			url: urls.base_url + 'ajax_controller/submitCallMeBack',
@@ -170,6 +171,7 @@ function callMeBackHandler(){
 				$("#modalFormDialog").html(msg);
 				var $modal = $('#modalFormDialog');
 				$modal.modal('show');
+				$(".overlay").hide();
 			}
 		});
 	});
@@ -177,6 +179,7 @@ function callMeBackHandler(){
 
 function submitCallMeBackForm(){
 	var dataString = $("#modalForm").serialize();
+	$(".overlay").show();
 	$.ajax({
 		type:'POST',
 		url: urls.base_url + 'ajax_controller/submitCallMeBack',
@@ -189,6 +192,7 @@ function submitCallMeBackForm(){
 			$("#modalFormDialog").html(msg);
 			$('.submitBtn').removeAttr("disabled");
 			$('.modal-body').css('opacity', '');
+			$(".overlay").hide();
 		}
 	});
 }

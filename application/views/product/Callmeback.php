@@ -27,6 +27,7 @@
 				}
 				?>
 			</p>
+			<?php if($success != 'SUCCESS'){ ?>
 			<div class="form-group row">
 				<label for="staticEmail" class="col-sm-4 col-form-label">Họ và tên</label>
 				<div class="col-sm-8">
@@ -46,12 +47,15 @@
 					<textarea name="txt_message" rows="3" style="resize: none;text-align: left" class="form-control">Tôi muốn biết thêm thông tin bất động sản này.</textarea>
 				</div>
 			</div>
+			<?php } ?>
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" name="crudaction" value="insert"/>
 			<input type="hidden" name="postid" value="<?=$postid?>"/>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+			<?php if($success != 'SUCCESS'){ ?>
 			<button id="submitBtn" type="button" class="btn btn-primary" onclick="submitCallMeBackForm()">Gửi tin nhắn</button>
+			<?php } ?>
 		</div>
 	</div>
 </div>
