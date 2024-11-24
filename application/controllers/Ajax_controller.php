@@ -208,6 +208,7 @@ class Ajax_controller extends CI_Controller
 				$data['ipAddress'] = $ipAddress;
 				$insert_id = $this->FeedBack_Model->addNewFeedBack($data);
 				if($insert_id != null && $insert_id > 0){
+					my_send_email("contact@nhadatancu.com","Có liên hệ từ số: " . $phoneNumber, $content);
 					echo 'success';
 				}else{
 					echo 'failure';
@@ -267,7 +268,7 @@ class Ajax_controller extends CI_Controller
 
 	private function sendMailInformCallMe($postId, $phone, $message){
 		$email = $this->Product_Model->getAuthorEmailOfProduct($postId);
-		if($email != null){
+		if($email != null && valid_email($email)){
 			my_send_email($email,"Nhadatancu.com tin nhắn từ: " . $phone, $message . "<br/> Xem tại đây: https://nhadatancu.com/yeu-cau-goi-lai.html");
 		}
 	}
