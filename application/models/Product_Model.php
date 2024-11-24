@@ -808,6 +808,11 @@ class Product_Model extends CI_Model
 		return $total->Total;
 	}
 
-
+	public function getAuthorEmailOfProduct($productId){
+		$sql = 'select u.Email from product p inner join us3r u on p.CreatedByID = u.Us3rID where p.ProductID = '.$productId;
+		$query = $this->db->query($sql);
+		$query = $query->row();
+		return $query->Email;
+	}
 
 }

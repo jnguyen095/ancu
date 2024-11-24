@@ -25,6 +25,7 @@ class Login_controller extends CI_Controller
 		$this->load->model('User_Model');
 		$this->load->helper("seo_url");
 		$this->load->helper('string');
+		$this->load->helper('MY_email');
 	}
 
 	public function logout(){
@@ -181,7 +182,7 @@ class Login_controller extends CI_Controller
 					$tempRandomStr = random_string('alnum', 10);
 					$tempPassword = md5($tempRandomStr);
 					$this->User_Model->updatePasswordByEmail($email, $tempPassword);
-					$this->sendEmail("Nhà Đất An Cư - Quên Mật Khẩu", "Mật khẩu mới: $tempRandomStr , Đăng nhập: https://nhadatancu.com/dang-nhap.html" , $email);
+					my_send_email($email,"Nhadatancu.com - Quên Mật Khẩu " . $phone, "Mật khẩu mới: $tempRandomStr , </br> Đăng nhập: https://nhadatancu.com/dang-nhap.html" );
 					$this->session->set_flashdata('message_response', 'Mật khẩu mới đã gửi vào email, vui lòng kiểm tra');
 					redirect('dang-nhap');
 					//$data['message_response'] = 'Mật khẩu mới đã gửi vào email, vui lòng kiểm tra';
@@ -192,40 +193,5 @@ class Login_controller extends CI_Controller
 		}
 
 		$this->load->view("login/forgotPassword", $data);
-	}
-
-	public function sendEmail($title, $message, $toEmail){
-
-		$this->load->library('email');
-
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'mail.nhadatancu.com'; // Replace with your SMTP server
-		$config['smtp_user'] = 'info@nhadatancu.com'; // Your SMTP username
-		$config['smtp_pass'] = 'p25khGAmY41P'; // Your SMTP password
-		$config['smtp_port'] = 587; // Typically 587 for TLS, 465 for SSL
-		$config['smtp_crypto'] = 'tls'; // Can be 'ssl' or 'tls'
-		$config['mailtype'] = 'html'; // Send email as HTML
-		$config['charset'] = 'utf-8'; // Character set
-		$config['wordwrap'] = TRUE; // Wordwrap for email content
-		$config['newline'] = "\r\n"; // Set newline character for email
-
-		$this->email->initialize($config);
-
-		///
-		$this->email->from('info@nhadatancu.com', 'Nhà Đất An Cư');
-		$this->email->to($toEmail);
-
-		$this->email->subject($title);
-		$this->email->message($message);
-
-
-		if ($this->email->send()) {
-			return true;
-		} else {
-			//echo "Email sending failed.";
-			//echo $this->email->print_debugger();
-			return false;
-		}
-
 	}
 }

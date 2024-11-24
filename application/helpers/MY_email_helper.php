@@ -138,3 +138,41 @@ if (!function_exists('name_email_format')) {
     }
 
 }
+
+if (!function_exists('my_send_email')) {
+
+	function my_send_email($toEmail, $subject, $message) {
+		$ci = get_instance();
+		$ci->load->library('email');
+
+		$config['protocol'] = MAIL_PROTOCAL;
+		$config['smtp_host'] = MAIL_HOST; // Replace with your SMTP server
+		$config['smtp_user'] = MAIL_SMTP_USER; // Your SMTP username
+		$config['smtp_pass'] = MAIL_SMTP_PASS; // Your SMTP password
+		$config['smtp_port'] = MAIL_SMTP_PORT; // Typically 587 for TLS, 465 for SSL
+		$config['smtp_crypto'] = 'tls'; // Can be 'ssl' or 'tls'
+		$config['mailtype'] = 'html'; // Send email as HTML
+		$config['charset'] = 'utf-8'; // Character set
+		$config['wordwrap'] = TRUE; // Wordwrap for email content
+		$config['newline'] = "\r\n"; // Set newline character for email
+
+		$ci->email->initialize($config);
+		///
+		$ci->email->from('info@nhadatancu.com', 'Nhà Đất An Cư');
+		$ci->email->to($toEmail);
+
+		$ci->email->subject($subject);
+		$ci->email->message($message);
+
+		if ($ci->email->send()) {
+			return true;
+		} else {
+			//echo "Email sending failed.";
+			//echo $this->email->print_debugger();
+			return false;
+		}
+	}
+
+}
+
+

@@ -24,6 +24,7 @@ class Ajax_controller extends CI_Controller
 		$this->load->helper('date');
 		$this->load->library('form_validation');
 		$this->load->helper('form');
+		$this->load->helper('MY_email');
 	}
 
 	public function findStreetByName(){
@@ -239,9 +240,7 @@ class Ajax_controller extends CI_Controller
 		if($crudaction == 'insert'){
 			$this->form_validation->set_error_delimiters('', '');
 			$this->form_validation->set_rules('txt_phonenumber','Số điện thoại', 'required');
-			if ($this->form_validation->run() == FALSE) {
-				// echo validation_errors();
-			}else{
+			if ($this->form_validation->run()) {
 				$fullName = $this->input->post('txt_fullname');
 				$phoneNumber = $this->input->post('txt_phonenumber');
 				$message = $this->input->post('txt_message');
@@ -257,6 +256,7 @@ class Ajax_controller extends CI_Controller
 					$insert_id = $this->CallMeBack_Model->addNew($data);
 					if($insert_id != null && $insert_id > 0){
 						$data['success'] = 'SUCCESS';
+						$this->sendMailInformCallMe($postid, $phoneNumber, $message);
 					}
 				}
 			}
@@ -265,5 +265,10 @@ class Ajax_controller extends CI_Controller
 		return $this->load->view('/product/Callmeback', $data);
 	}
 
-
+	private function sendMailInformCallMe($postId, $phone, $message){
+		$email = $this->Product_Model->getAuthorEmailOfProduct($postId);
+		if($email != null){
+			my_send_email($email,"Nhadatancu.com tin nhắn từ: " . $phone, $message . "<br/> Xem tại đây: https://nhadatancu.com/yeu-cau-goi-lai.html");
+		}
+	}
 }
