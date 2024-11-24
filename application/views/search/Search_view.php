@@ -232,6 +232,7 @@
 		<?php $this->load->view('/common/district-left-link')?>
 		<?php $this->load->view('/common/branch-left-link')?>
 		<?php $this->load->view('/common/Search_filter') ?>
+		<?php $this->load->view('/Subscrible') ?>
 	</div>
 </div>
 

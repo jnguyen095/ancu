@@ -9,7 +9,7 @@
 <div class="subscribe-panel col-md-12 no-padding mobile-hide">
 	<div class="well">
 		<form id="subscribleForm" action="#">
-			<div class="row text-center panel-title">ĐĂNG KÝ NHẬN TIN</div>
+			<div class="row text-center panel-title">ĐĂNG KÝ NHẬN TIN BĐS</div>
 			<div class="input-group">
 				<input class="btn btn-sm" name="email" id="sbEmail" type="email" placeholder="Nhập email của bạn" required>
 				<a class="btn btn-info btn-sm" id="btnSubscrible">Đăng ký</a>
