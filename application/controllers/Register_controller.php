@@ -25,6 +25,7 @@ class Register_controller extends CI_Controller
 		$this->load->model('Category_Model');
 		$this->load->model('ProCode_Model');
 		$this->load->helper("seo_url");
+		$this->load->helper('my_email');
 	}
 
 	public function index()
@@ -76,7 +77,11 @@ class Register_controller extends CI_Controller
 					$newdata['avatar'] = null;
 
 					$this->User_Model->addNewUser($newdata, USER_GROUP_CUSTOMER);
-					$data['message_response'] = 'Đăng ký thành công';
+					$this->session->set_flashdata('message_response', 'Đăng ký tài khoản thành công, hãy đăng nhập');
+					if($email != null && valid_email($email)){
+						my_send_email($email,"Nhadatancu.com - Đăng ký tài khoản thành công", "<p>Đăng nhập tại đây: https://nhadatancu.com/dang-nhap.html</p>" );
+					}
+					redirect('dang-nhap');
 				}
 			}
 		}
@@ -146,8 +151,11 @@ class Register_controller extends CI_Controller
 						$userId = $this->User_Model->addNewUser($newdata, USER_GROUP_BROKER);
 						// insert into promotion code statistic
 						$this->ProCode_Model->insertIntoStatistic($userId, $code);
-
-						$data['message_response'] = 'Bạn đã đăng ký thành công tài khoản chuyên viên, hãy đăng nhập';
+						$this->session->set_flashdata('message_response', 'Bạn đã đăng ký thành công tài khoản chuyên viên, hãy đăng nhập');
+						if($email != null && valid_email($email)){
+							my_send_email($email,"Nhadatancu.com - Đăng ký tài khoản thành công", "<p>Đăng nhập tại đây: https://nhadatancu.com/dang-nhap.html</p>" );
+						}
+						redirect('dang-nhap');
 					}
 				}
 			}
