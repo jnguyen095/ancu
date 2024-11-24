@@ -199,29 +199,19 @@ function submitCallMeBackForm(){
 
 
 function submitContactForm(){
-		var dataString = $("#modalForm").serialize();
-		$.ajax({
-			type:'POST',
-			url: urls.base_url + 'ajax_controller/contactFormHandler',
-			data: dataString,
-			beforeSend: function () {
-				$('.submitBtn').attr("disabled","disabled");
-				$('.modal-body').css('opacity', '.5');
-			},
-			success:function(msg){
-				if(msg == "success"){
-					$('#fullName').val('');
-					$('#inputEmail').val('');
-					$('#inputPhone').val('');
-					$('#inputMessage').val('');
-					$('#txtCaptcha').val('');
-					$("#btnSendFeedBack").hide();
-					$('.statusMsg').html('<span style="color:green;">Gửi thành công, chúng tôi sẻ phản hồi ngay khi có thể.</p>');
-				}else{
-					$('.statusMsg').html('<span style="color:red;">'+msg+'</span>');
-				}
-				$('.submitBtn').removeAttr("disabled");
-				$('.modal-body').css('opacity', '');
-			}
-		});
+	var dataString = $("#modalForm").serialize();
+	$.ajax({
+		type:'POST',
+		url: urls.base_url + 'ajax_controller/contactFormHandler',
+		data: dataString,
+		beforeSend: function () {
+			$('.submitBtn').attr("disabled","disabled");
+			$('.modal-body').css('opacity', '.5');
+		},
+		success:function(msg){
+			$("#modalFormDialog").html(msg);
+			$('.submitBtn').removeAttr("disabled");
+			$('.modal-body').css('opacity', '');
+		}
+	});
 }

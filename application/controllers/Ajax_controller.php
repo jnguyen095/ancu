@@ -185,42 +185,40 @@ class Ajax_controller extends CI_Controller
 
 	public function contactFormHandler(){
 		$crudaction = $this->input->post('crudaction');
+		$data = [];
+		$fullName = $this->input->post('fullName');
+		$phoneNumber = $this->input->post('phoneNumber');
+		$email = $this->input->post('email');
+		$content = $this->input->post('content');
+		$data['fullName'] = $fullName;
+		$data['phoneNumber'] = $phoneNumber;
+		$data['email'] = $email;
+		$data['content'] = $content;
 
-		if($crudaction == 'insert'){
+		if($crudaction == 'insert') {
 			$this->form_validation->set_error_delimiters('', '');
-			$this->form_validation->set_rules('fullName','Họ tên', 'required');
-			$this->form_validation->set_rules('phoneNumber','Số điện thoại', 'required');
-			$this->form_validation->set_rules('email','Email','valid_email');
-			$this->form_validation->set_rules('content','Nội dung','required');
+			$this->form_validation->set_rules('fullName', 'Họ tên', 'required');
+			$this->form_validation->set_rules('phoneNumber', 'Số điện thoại', 'required');
+			$this->form_validation->set_rules('email', 'Email', 'valid_email');
+			$this->form_validation->set_rules('content', 'Nội dung', 'required');
 			$this->form_validation->set_rules("txt_captcha", "Mã xác thực", "callback_validateCaptcha");
-			if ($this->form_validation->run() == FALSE) {
-				echo validation_errors();
-			}else{
-				$fullName = $this->input->post('fullName');
-				$phoneNumber = $this->input->post('phoneNumber');
-				$email = $this->input->post('email');
-				$content = $this->input->post('content');
+			if ($this->form_validation->run()) {
 				$ipAddress = $this->input->ip_address();
-				$data['fullName'] = $fullName;
-				$data['phoneNumber'] = $phoneNumber;
-				$data['email'] = $email;
-				$data['content'] = $content;
 				$data['ipAddress'] = $ipAddress;
 				$insert_id = $this->FeedBack_Model->addNewFeedBack($data);
-				if($insert_id != null && $insert_id > 0){
-					my_send_email("contact@nhadatancu.com","Có liên hệ từ số: " . $phoneNumber, $content);
-					echo 'success';
-				}else{
-					echo 'failure';
+				if ($insert_id != null && $insert_id > 0) {
+					my_send_email("contact@nhadatancu.com", "Có liên hệ từ số: " . $phoneNumber, $content);
+					$data['message_response'] = 'Đã gửi yêu cầu đến Nhà Đất An Cư thành công';
+				} else {
+					$data['error_message']  = 'Không gửi được, có vấn đề xảy ra vui lòng kiểm tra lại';
 				}
 			}
-		}else{
-			$captcha = $this->generateCaptcha();
-			$data['capchaImg'] = $captcha['image'];
-			$this->session->set_userdata('captcha', $captcha['word']);
-			return $this->load->view('/contact/contact', $data);
 		}
 
+		$captcha = $this->generateCaptcha();
+		$data['capchaImg'] = $captcha['image'];
+		$this->session->set_userdata('captcha', $captcha['word']);
+		return $this->load->view('/contact/contact', $data);
 	}
 
 	public function validateCaptcha($str){
