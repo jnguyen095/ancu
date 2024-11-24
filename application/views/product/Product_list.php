@@ -115,6 +115,7 @@
 			<?php
 		}
 		?>
+		<?php $this->load->view('/Subscrible') ?>
 
 		<div class="clear-both"></div>
 
