@@ -25,7 +25,7 @@ class Login_controller extends CI_Controller
 		$this->load->model('User_Model');
 		$this->load->helper("seo_url");
 		$this->load->helper('string');
-		$this->load->helper('MY_email');
+		$this->load->helper('my_email');
 	}
 
 	public function logout(){

@@ -24,7 +24,7 @@ class Ajax_controller extends CI_Controller
 		$this->load->helper('date');
 		$this->load->library('form_validation');
 		$this->load->helper('form');
-		$this->load->helper('MY_email');
+		$this->load->helper('my_email');
 	}
 
 	public function findStreetByName(){
