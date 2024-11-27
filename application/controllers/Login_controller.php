@@ -116,7 +116,8 @@ class Login_controller extends CI_Controller
 						'phone' => $phone,
 						'fullname' => $usr_result->FullName,
 						'loginuser' => TRUE,
-						'usergroup' => $usr_result->UserGroup
+						'usergroup' => $usr_result->UserGroup,
+						'avatar' => $usr_result->Avatar
 					);
 					$this->session->set_userdata($sessiondata);
 					$this->Login_Model->updateLastLogin($usr_result->Us3rID);
@@ -145,6 +146,7 @@ class Login_controller extends CI_Controller
 		$this->session->unset_userdata('loginid');
 		$this->session->unset_userdata('usergroup');
 		$this->session->unset_userdata('fullname');
+		$this->session->unset_userdata('avatar');
 	}
 
 	function forgotPassword(){

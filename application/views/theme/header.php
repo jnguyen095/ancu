@@ -58,13 +58,20 @@
 						</a>
 						<ul class="dropdown-menu">
 							<?php
+							if($this->session->userdata('avatar') != null && strlen($this->session->userdata('avatar')) > 0) {
+								?>
+								<li class="avatar text-center gr-<?=$this->session->userdata('usergroup')?>"><img src="<?=base_url($this->session->userdata('avatar'))?>"/> </li>
+								<?php
+							}?>
+
+							<?php
 							if($this->session->userdata('usergroup') != null && ($this->session->userdata('usergroup') == 'BROKER') || $this->session->userdata('usergroup') == 'STAFF') {
 								?>
 								<li class="ugroup ugroupvip"><i class="glyphicon glyphicon-star"></i>&nbsp;Không Giới Hạn&nbsp;<i class="glyphicon glyphicon-star"></i></li>
 							<?php
 							} else if($this->session->userdata('usergroup') != null && $this->session->userdata('usergroup') == 'USER'){
 							?>
-								<li class="ugroup ugroupend"><i class="glyphicon glyphicon-star"></i>&nbsp;Hiệu Quả</li>
+								<li class="ugroup ugroupend"><i class="glyphicon glyphicon-star"></i>&nbsp;Hiệu Quả&nbsp;<i class="glyphicon glyphicon-star"></i></li>
 							<?php
 							}
 							?>

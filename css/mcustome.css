@@ -1569,3 +1569,20 @@ img.img-sample-house{
 .horizontal-search{
 	margin-bottom: 10px;
 }
+
+.avatar img{
+	max-width: 150px;
+	max-height: 150px;
+	padding: 4px;
+	margin-bottom: 5px;
+}
+.avatar.gr-ADMIN img{
+	border: solid 1px #1f23ff;
+}
+.avatar.gr-BROKER img,
+.avatar.gr-STAFF img{
+	border: solid 1px #FFA500;
+}
+.avatar.gr-USER img{
+	border: solid 1px #dddddd;
+}
