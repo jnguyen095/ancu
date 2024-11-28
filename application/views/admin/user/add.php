@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Nhà Đất An Cư | Quản lý nhân viên</title>
+	<title>Nhà Đất An Cư | Quản lý Nguời Dùng</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
 	<link rel="stylesheet" href="<?=base_url('/admin/css/madmin.css')?>">
@@ -30,11 +30,11 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Thêm/Chỉnh sửa nhân viên
+				Thêm/Chỉnh Người Dùng
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="<?=base_url('/admin/dashboard.html')?>"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-				<li><a href="<?=base_url('/admin/staff/list.html')?>">Quản lý nhân viên</a></li>
+				<li><a href="<?=base_url('/admin/user/list.html')?>">Quản lý người dùng</a></li>
 				<li class="active">Thêm/Chỉnh sửa</li>
 			</ol>
 		</section>
@@ -51,7 +51,7 @@
 				<div class="box-body">
 					<?php
 					$attributes = array("enctype" => "multipart/form-data", "id" => "frmAddStaff", "class" => "form-horizontal");
-					echo form_open("admin/staff/add" . (isset($staffID) ? '-' . $staffID : ''), $attributes);
+					echo form_open("admin/user/add" . (isset($staffID) ? '-' . $staffID : ''), $attributes);
 					?>
 					<div class="form-group">
 						<div class="col-md-2">
@@ -60,8 +60,9 @@
 						<div class="col-md-4">
 							<select name="txt_usergroup" class="form-control">
 								<option value="">---Chọn nhóm người dùng---</option>
-								<option value="3" <?=(isset($txt_usergroup) && $txt_usergroup == '3') ? 'selected' : '' ?>>Nhân viên</option>
-								<option value="4" <?=(isset($txt_usergroup) && $txt_usergroup == '4') ? 'selected' : '' ?>>Môi giới</option>
+								<option value="<?=USER_GROUP_CUSTOMER?>" <?=(isset($txt_usergroup) && $txt_usergroup == USER_GROUP_CUSTOMER) ? 'selected' : '' ?>>Người dùng</option>
+								<option value="<?=USER_GROUP_STAFF?>" <?=(isset($txt_usergroup) && $txt_usergroup == USER_GROUP_STAFF) ? 'selected' : '' ?>>Nhân viên</option>
+								<option value="<?=USER_GROUP_BROKER?>" <?=(isset($txt_usergroup) && $txt_usergroup == USER_GROUP_BROKER) ? 'selected' : '' ?>>Môi giới</option>
 							</select>
 							<span class="text-danger"><?php echo form_error('txt_usergroup'); ?></span>
 						</div>
@@ -177,7 +178,13 @@
 						<div class="col-lg-8 col-sm-8 col-lg-offset-2 text-left">
 							<input type="hidden" name="crudaction" value="register"/>
 							<input id="btn_login" name="btn_login" type="submit" class="btn btn-info" value="Đăng Ký" />
-							<a href="<?=base_url('/admin/staff/list.html')?>" class="btn btn-default">Trở lại</a>
+							<?php
+							if(isset($txt_usergroup) && $txt_usergroup == USER_GROUP_CUSTOMER){
+							?>
+								<a href="<?=base_url('/admin/user/list.html')?>" class="btn btn-default">Trở lại</a>
+							<?php } else { ?>
+								<a href="<?=base_url('/admin/staff/list.html')?>" class="btn btn-default">Trở lại</a>
+							<?php }  ?>
 						</div>
 					</div>
 					<input type="hidden" name="staffID" value="<?=isset($staffID) ? $staffID : ''?>">

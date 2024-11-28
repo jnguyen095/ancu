@@ -171,4 +171,9 @@ class User_Model extends CI_Model
 		$this->db->update('us3r', $newdata);
 	}
 
+	function deleteByUserId($userId){
+		$this->db->delete('us3r', array('Us3rID' => $userId));
+		// TODO: delete reference tables
+	}
+
 }

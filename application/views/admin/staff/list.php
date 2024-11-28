@@ -44,7 +44,8 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-				<div class="top-buttons"><a class="btn btn-primary" href="<?=base_url('/admin/staff/add.html')?>">Thêm Mới</a> </div>
+
+				<div class="top-buttons"><a class="btn btn-primary" href="<?=base_url('/admin/user/add.html')?>">Thêm Mới</a> </div>
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>
@@ -80,7 +81,8 @@
 									<td class="text-center"><?=number_format($staff->TotalPost)?></td>
 									<td><?=date('d/m/Y m:s', strtotime($staff->LastLogin)) ?></td>
 									<td>
-										<a href="<?=base_url('/admin/staff/add-'.$staff->Us3rID.'.html')?>"><i class="	glyphicon glyphicon-edit"></i></a>
+										<a data-toggle="tooltip" title="Chỉnh sửa thông tin" href="<?=base_url('/admin/user/add-'.$staff->Us3rID.'.html')?>"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;|&nbsp;
+										<a data-toggle="tooltip" title="Xóa Người dùng" class="remove-user" data-userid="<?=$staff->Us3rID?>"><i class="glyphicon glyphicon-remove"></i></a>
 									</td>
 								</tr>
 								<?php
@@ -108,16 +110,42 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
 <script src="<?=base_url('/admin/js/jquery.min.js')?>"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url('/admin/js/bootstrap.min.js')?>"></script>
 <!-- AdminLTE App -->
 <script src="<?=base_url('/admin/js/adminlte.min.js')?>"></script>
+<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
+<script src="<?=base_url('/admin/js/bootstrap-datepicker.min.js')?>"></script>
+<script src="<?=base_url('/admin/js/tindatdai_admin.js')?>"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+<script type="text/javascript">
+	function deleteUserHandler(){
+		$('.remove-user').click(function(){
+			var userId = $(this).data('userid');
+			bootbox.confirm("Bạn đã chắc chắn xóa user này chưa?", function(result){
+				if(result){
+					jQuery.ajax({
+						type: "POST",
+						url: '<?=base_url("/admin/UserManagement_controller/deleteUser")?>',
+						dataType: 'json',
+						data: {userId: userId},
+						success: function(res){
+							if(res.result == true){
+								bootbox.alert("Xóa thành công");
+								location.reload();
+							}
+						}
+					});
+				}
+			});
+		});
+	}
+
+	$(document).ready(function(){
+		deleteUserHandler();
+	});
+</script>
+
 </body>
 </html>

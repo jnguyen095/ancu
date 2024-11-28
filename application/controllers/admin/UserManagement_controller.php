@@ -45,7 +45,7 @@ class UserManagement_controller extends CI_Controller
 		$this->load->view("admin/user/list", $data);
 	}
 
-	public function staff()
+	public function staffList()
 	{
 		$config = pagination($this);
 		$config['base_url'] = base_url('admin/staff/list.html');
@@ -63,7 +63,7 @@ class UserManagement_controller extends CI_Controller
 		$this->load->view("admin/staff/list", $data);
 	}
 
-	public function addStaff($staffId = null){
+	public function addUser($userId = null){
 		$data = [];
 		$fullname = $this->input->post('txt_fullname');
 		$password = $this->input->post('txt_password');
@@ -87,8 +87,8 @@ class UserManagement_controller extends CI_Controller
 		$data['ch_status'] = isset($status) ? $status : ACTIVE;
 
 
-		if($staffId != null){
-			$staff = $this->User_Model->getUserById($staffId);
+		if($userId != null){
+			$staff = $this->User_Model->getUserById($userId);
 			$data['staffID'] = $staff->Us3rID;
 			$data['txt_fullname'] = $staff->FullName;
 			$data['txt_password'] = $staff->Password;
@@ -105,7 +105,7 @@ class UserManagement_controller extends CI_Controller
 			$this->form_validation->set_message('txt_fullname', 'Họ tên không được để trống');
 			$this->form_validation->set_rules("txt_fullname", "Họ tên", "trim|required");
 
-			if($staffId == null){
+			if($userId == null){
 				$this->form_validation->set_rules("txt_password", "Mật khẩu", "trim|required");
 			}
 			$this->form_validation->set_rules("txt_email", "Email", "valid_email");
@@ -119,12 +119,12 @@ class UserManagement_controller extends CI_Controller
 			}
 
 			if ($this->form_validation->run()) {
-				$count = $this->User_Model->checkExistUserNameAddGroup($phone, $userGroupID, $staffId);
+				$count = $this->User_Model->checkExistUserNameAddGroup($phone, $userGroupID, $userId);
 				if($count > 0){
 					$data['error_message'] = 'Tên đăng nhập đã tồn tại.';
-					$this->load->view('admin/staff/add', $data);
+					$this->load->view('admin/user/add', $data);
 				}else{
-					$newdata['Us3rID'] = $staffId;
+					$newdata['Us3rID'] = $userId;
 					$newdata['fullname'] = $fullname;
 					$newdata['password'] = $password;
 					$newdata['email'] = $email;
@@ -135,13 +135,22 @@ class UserManagement_controller extends CI_Controller
 					$newdata['avatar'] = $data['txt_avatar'];
 
 					$this->User_Model->addNewUser($newdata, $userGroupID);
-					$data['error_message'] = 'Đăng ký thành công';
-					redirect('admin/staff/list');
+					if($userId != null){
+						$this->session->set_flashdata('message_response', 'Cập nhật tài khoản tài khoản thành công');
+					} else {
+						$this->session->set_flashdata('message_response', 'Thêm tài khoản tài khoản thành công');
+					}
+					if($userGroupID == USER_GROUP_STAFF || $userGroupID == USER_GROUP_BROKER){
+						redirect('admin/staff/list');
+					} else {
+						redirect('admin/user/list');
+					}
+
 				}
 			}
 		}
 
-		$this->load->view("admin/staff/add", $data);
+		$this->load->view("admin/user/add", $data);
 	}
 
 	private function uploadImage(){
@@ -184,6 +193,16 @@ class UserManagement_controller extends CI_Controller
 			}
 		}else {
 			return "";
+		}
+	}
+
+	public function deleteUser(){
+		$userId = $this->input->post('userId');
+		if($userId != null){
+			$this->User_Model->deleteByUserId($userId);
+			echo json_encode(array('result' => true));
+		} else {
+			echo json_encode(array('result' => false));
 		}
 	}
 }

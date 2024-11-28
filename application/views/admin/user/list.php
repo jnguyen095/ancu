@@ -44,12 +44,14 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
+
 					<div class="row search-filter">
 						<div class="col-sm-4">
 							<div class="form-group">
 								<input type="text" name="searchFor" placeholder="Tìm theo tên, số điện thoại, email, địa chỉ..." class="form-control" id="searchKey" onchange="sendRequest();">
 							</div>
 						</div>
+						<div class="top-buttons text-right"><a class="btn btn-primary" href="<?=base_url('/admin/user/add.html')?>">Thêm Mới</a> </div>
 					</div>
 
 					<div class="table-responsive">
@@ -86,8 +88,8 @@
 									<td>
 										<a href="<?=base_url('/admin/product/list.html?createdById='.$user->Us3rID)?>" data-toggle="tooltip" title="Xem tin rao"><i class="glyphicon glyphicon-folder-open"></i></a>&nbsp;|&nbsp;
 										<a href="<?=base_url('/admin/transfer-user-'.$user->Us3rID.'.html')?>" data-toggle="tooltip" title="Xử lý giao dịch"><i class="glyphicon glyphicon-random"></i></a>&nbsp;|&nbsp;
-										<a data-toggle="tooltip" title="Chỉnh sửa"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;|&nbsp;
-										<a data-toggle="tooltip" title="Xóa Người dùng"><i class="glyphicon glyphicon-remove"></i></a>
+										<a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url('/admin/user/add-'.$user->Us3rID.'.html')?>"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;|&nbsp;
+										<a data-toggle="tooltip" title="Xóa Người dùng" class="remove-user" data-userid="<?=$user->Us3rID?>"><i class="glyphicon glyphicon-remove"></i></a>
 									</td>
 								</tr>
 								<?php
@@ -116,12 +118,14 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
+<!-- jQuery 3 -->
 <script src="<?=base_url('/admin/js/jquery.min.js')?>"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?=base_url('/admin/js/bootstrap.min.js')?>"></script>
 <!-- AdminLTE App -->
 <script src="<?=base_url('/admin/js/adminlte.min.js')?>"></script>
-
+<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
+<script src="<?=base_url('/admin/js/bootstrap-datepicker.min.js')?>"></script>
 <script src="<?=base_url('/admin/js/tindatdai_admin.js')?>"></script>
 
 <script type="text/javascript">
@@ -148,6 +152,33 @@
 	}else{
 		currentSort.attr('data-direction', "ASC").find('i.glyphicon').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom active');
 	}
+
+
+	function deleteUserHandler(){
+		$('.remove-user').click(function(){
+			var userId = $(this).data('userid');
+			bootbox.confirm("Bạn đã chắc chắn xóa user này chưa?", function(result){
+				if(result){
+					jQuery.ajax({
+						type: "POST",
+						url: '<?=base_url("/admin/UserManagement_controller/deleteUser")?>',
+						dataType: 'json',
+						data: {userId: userId},
+						success: function(res){
+							if(res.result == true){
+								bootbox.alert("Xóa thành công");
+								location.reload();
+							}
+						}
+					});
+				}
+			});
+		});
+	}
+
+	$(document).ready(function(){
+		deleteUserHandler();
+	});
 </script>
 </body>
 </html>
