@@ -132,8 +132,11 @@
 						data: {userId: userId},
 						success: function(res){
 							if(res.result == true){
-								bootbox.alert("Xóa thành công");
-								location.reload();
+								bootbox.alert("Xóa thành công", function(r) {
+									if(!r){
+										location.reload();
+									}
+								});
 							}
 						}
 					});
