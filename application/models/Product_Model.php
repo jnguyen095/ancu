@@ -758,6 +758,7 @@ class Product_Model extends CI_Model
 		$sql .= " inner join city c on p.cityid = c.cityid";
 		$sql .= " inner join district d on p.districtid = d.districtid";
 		$sql .= " where p.status = 1 and p.createdbyid = {$userId}";
+		$sql .= ' order by date(p.modifieddate) desc';
 		$sql .= " limit {$offset},{$limit}";
 		$query = $this->db->query($sql);
 		$result['products'] = $query->result();

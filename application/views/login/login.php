@@ -75,7 +75,7 @@
 						<input id="btn_login" name="btn_login" type="submit" class="btn btn-info" value="Đăng nhập" /> | <a href="<?=base_url('quen-mat-khau.html')?>">Quên mật khẩu</a>
 					</div>
 				</div>
-
+				<?php /*
 				<legend class="text-center">Hoặc</legend>
 
 				<div class="form-group">
@@ -93,6 +93,7 @@
 
 					</div>
 				</div>
+ 				*/?>
 
 				<legend class="text-center">Chưa có tài khoản?</legend>
 				<div class="form-group">

@@ -14,6 +14,22 @@ if(isset($userAuthor)) {
 		<div class="bg-success">LIÊN HỆ</div>
 
 		<div class="block-body">
+			<?php
+			if(isset($userAuthor->Avatar)) { ?>
+				<div class="row no-margin">
+					<div class="col-xs-12 text-center avatar"><img src="<?=base_url($userAuthor->Avatar)?>"/></div>
+				</div>
+			<?php
+			}?>
+
+			<?php
+			if(isset($userAuthor->avatar)) { ?>
+				<div class="row no-margin">
+					<div class="col-xs-12 text-center avatar"><img src="<?=base_url($userAuthor->Avatar)?>"/></div>
+				</div>
+				<?php
+			}?>
+
 			<div class="row no-margin">
 				<div class="col-xs-2"><i class="glyphicon glyphicon-user"></i></div>
 				<div class="col-xs-10 text-left"><?=$userAuthor->FullName?></div>

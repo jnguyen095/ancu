@@ -331,9 +331,13 @@
 		<?php if(isset($sameLevels) && count($sameLevels) > 0) {
 			echo "<div class='row no-margin bottom-detail-same-level'>";
 			foreach ($sameLevels as $sameLevel) {
-				?>
-				<div class="col-sm-6 col-xs-12 no-padding-right"><a href="<?=base_url(seo_url($sameLevel->CatName.'-'.$district->DistrictName.'-c'.$sameLevel->CategoryID.'-d'.$district->DistrictID)).'.html'?>" class="narrow-a"><?=$sameLevel->CatName . ' tại '. $district->DistrictName?></a></div>
-				<?php
+				if(isset($district) && $district != null) {
+					?>
+					<div class="col-sm-6 col-xs-12 no-padding-right"><a
+							href="<?= base_url(seo_url($sameLevel->CatName . '-' . $district->DistrictName . '-c' . $sameLevel->CategoryID . '-d' . $district->DistrictID)) . '.html' ?>"
+							class="narrow-a"><?= $sameLevel->CatName . ' tại ' . $district->DistrictName ?></a></div>
+					<?php
+				}
 			}
 			echo "<div class='clear-both'></div>";
 			echo "</div>";
